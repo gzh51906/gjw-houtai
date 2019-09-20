@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content style="margin: 0 16px">
+  <a-layout-content>
     <a-breadcrumb style="margin: 16px 0">
       <a-breadcrumb-item>用户管理</a-breadcrumb-item>
       <a-breadcrumb-item>用户列表</a-breadcrumb-item>

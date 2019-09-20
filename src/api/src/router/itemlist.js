@@ -17,22 +17,7 @@ Router.get('/', async (req, res) => {
         limit,
         sort
     } = req.query;
-    let data = await find('sort', {}, {
-        skip,
-        limit,
-        sort
-    });
-    res.send(formatData({
-        data
-    }))
-})
-Router.get('/itemlist', async (req, res) => {
-    let {
-        skip,
-        limit,
-        sort
-    } = req.query;
-    let data = await find('iemtlist', {}, {
+    let data = await find('datalist', {}, {
         skip,
         limit,
         sort
@@ -46,11 +31,10 @@ Router.get('/itemlist', async (req, res) => {
 Router.get('/goods', async (req, res) => {
     // console.log('----', req.query);
     let {
-        id
+        name
     } = req.query;
-
     let data = await find('datalist', {
-        name: id
+        name: name
     });
     // res.send('res')
     res.send(formatData({
@@ -67,6 +51,27 @@ Router.get('/item', async (req, res) => {
         ID: id * 1
     });
     // res.send('res')
+    res.send(formatData({
+        data
+    }))
+})
+// 修改数据
+Router.post('/updata', async (req, res) => {
+    // console.log("修改数据", req.body);
+    let {
+        tempProlist,
+        name
+    } = req.body;
+    // console.log(tempProlist, name);//前端传来的qty要被修改的值
+
+    let data = await update('datalist', {
+        name
+    }, {
+        $set: {
+            Prolist: tempProlist
+        }
+    });
+
     res.send(formatData({
         data
     }))
@@ -94,22 +99,18 @@ Router.post('/reg', async (req, res) => {
 
 
 // 添加数据
-Router.post('/cart', async (req, res) => {
-    // console.log("增加数据");
+Router.post('/item', async (req, res) => {
+    // console.log("增加数据", req.body);
     let {
         APPPrice,
-        ID,
         Pic,
-        ProductName,
-        qty
+        ProductName
     } = req.body;
     try {
-        insert('cart', {
+        insert('backserver', {
             APPPrice,
-            ID,
             Pic,
-            ProductName,
-            qty
+            ProductName
         });
         res.send(formatData())
     } catch (err) {
@@ -138,27 +139,7 @@ Router.get('/cartlist', async (req, res) => {
     }))
 })
 
-// 修改数据
-Router.post('/updata', async (req, res) => {
-    // console.log("修改数据");
-    let {
-        ID,
-        i
-    } = req.body;
-    // console.log(i);//前端传来的qty要被修改的值
 
-    let data = await update('cart', {
-        ID
-    }, {
-        $set: {
-            qty: i
-        }
-    });
-
-    res.send(formatData({
-        data
-    }))
-})
 
 // 搜索功能，查看数据中是否含有某项
 Router.get('/search', async (req, res) => {

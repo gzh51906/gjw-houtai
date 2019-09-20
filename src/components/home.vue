@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <a-layout id="components-layout-demo-side" style="min-height: 100vh">
-      <a-layout-sider collapsible v-model="collapsed">
+      <a-layout-sider collapsible v-model="collapsed" style="position:fixed;height:580px">
         <div class="logo">
           <a-icon type="slack" class="a-icon-crown" />后台管理系统
         </div>
@@ -24,12 +24,12 @@
           </a-sub-menu>
         </a-menu>
       </a-layout-sider>
-      <a-layout class="laygout-content-ct">
+      <a-layout class="laygout-content-ct" style="margin-left:220px">
         <a-layout-header style="background: #fff;" class="httitle">购酒网后台管理系统</a-layout-header>
         <itemlist v-if="$route.path=='/itemlist'"></itemlist>
-        <additem v-if="$route.path=='/additem'" style="margin-left:20px"></additem>
-        <adduser v-if="$route.path=='/adduser'" style="margin-left:20px"></adduser>
-        <userlist v-if="$route.path=='/userlist'" style="margin-left:20px"></userlist>
+        <additem v-if="$route.path=='/additem'"></additem>
+        <adduser v-if="$route.path=='/adduser'"></adduser>
+        <userlist v-if="$route.path=='/userlist'"></userlist>
       </a-layout>
     </a-layout>
   </div>

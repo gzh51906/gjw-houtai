@@ -12,6 +12,7 @@ const sortRouter = require('./sort');
 const userRouter = require('./user');
 const homeRouter = require('./home');
 const cartRouter = require('./cart');
+const itemListRouter = require('./itemlist');
 
 
 
@@ -34,10 +35,11 @@ Router.use((req, res, next) => {
 
 // 商品
 Router.use('/user', userRouter);
-Router.use('/home',homeRouter);
+Router.use('/home', homeRouter);
 Router.use('/sort', sortRouter);
 Router.use('/cart', cartRouter);
-Router.get('/verify',(req,res)=>{
+Router.use('/itemlist', itemListRouter);
+Router.get('/verify', (req, res) => {
     // 获取前端传入的token
     // 对token进行校验
     let authorization = req.header('Authorization');
