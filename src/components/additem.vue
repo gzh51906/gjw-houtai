@@ -88,15 +88,12 @@ export default {
       let BagExplain = this.obj.BagExplain;
       let Pic = this.obj.Pic;
       let ProductName = this.obj.ProductName;
-      let { data } = await this.$axios.post(
-        "http://localhost:19066/itemlist/item",
-        {
-          APPPrice,
-          BagExplain,
-          Pic,
-          ProductName
-        }
-      );
+      let { data } = await this.$axios.post("itemlist/item", {
+        APPPrice,
+        BagExplain,
+        Pic,
+        ProductName
+      });
       if (data.code) {
         this.success();
         this.init();

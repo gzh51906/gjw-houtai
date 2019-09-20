@@ -220,7 +220,7 @@ export default {
       this.secondCity = [];
       let {
         data: { data }
-      } = await this.$axios.get("http://localhost:19066/sort/");
+      } = await this.$axios.get("sort/");
       this.provinceData1 = data.length ? data[0].item_data : [];
       let arr = data[0].item_data;
       provinceData = [];
@@ -269,7 +269,7 @@ export default {
       // 封装请求(获取所有数据)
       let {
         data: { data }
-      } = await this.$axios.get("http://localhost:19066/itemlist/");
+      } = await this.$axios.get("itemlist/");
       return data;
     },
     async getdata(val) {
@@ -284,7 +284,7 @@ export default {
       // 查询对应的数据
       let {
         data: { data }
-      } = await this.$axios.get("http://localhost:19066/itemlist/goods", {
+      } = await this.$axios.get("itemlist/goods", {
         params: { name: this.val }
       });
       return data;
@@ -332,10 +332,10 @@ export default {
           (element, i) => !this.selectedRowKeys.includes(element.ID)
         );
         // tempProlist为要修改Prolist的新数组数据
-        let datas = await this.$axios.post(
-          "http://localhost:19066/itemlist/updata",
-          { name, tempProlist }
-        );
+        let datas = await this.$axios.post("itemlist/updata", {
+          name,
+          tempProlist
+        });
         this.selectedRowKeys = [];
         this.openNotificationWithIcon("success", "删除");
       }
@@ -345,10 +345,10 @@ export default {
       const newData = [...this.data];
       const tempProlist = newData.filter(item => ID !== item.ID);
       this.data = tempProlist;
-      let datas = await this.$axios.post(
-        "http://localhost:19066/itemlist/updata",
-        { name, tempProlist }
-      );
+      let datas = await this.$axios.post("itemlist/updata", {
+        name,
+        tempProlist
+      });
     },
     async save(ID, name) {
       // (1)获取对应的数据，请求回来在前端进行判断，重组数组，再把重组的数组发给后端进行数据更新
@@ -363,10 +363,10 @@ export default {
         this.cacheData = newData.map(item => ({ ...item }));
       }
       tempProlist.unshift(target); //要被修改的数组。
-      let datas = await this.$axios.post(
-        "http://localhost:19066/itemlist/updata",
-        { name, tempProlist }
-      );
+      let datas = await this.$axios.post("itemlist/updata", {
+        name,
+        tempProlist
+      });
     },
     cancel(ID) {
       const newData = [...this.data];
